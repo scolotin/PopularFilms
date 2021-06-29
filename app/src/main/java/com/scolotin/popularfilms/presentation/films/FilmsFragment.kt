@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.terrakok.cicerone.Router
 import com.scolotin.popularfilms.R
 import com.scolotin.popularfilms.databinding.FragmentFilmsBinding
 import com.scolotin.popularfilms.model.Film
 import com.scolotin.popularfilms.presentation.abs.AbsFragment
-import com.scolotin.popularfilms.repository.FilmsRepository
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -22,13 +20,10 @@ class FilmsFragment : AbsFragment(R.layout.fragment_films), FilmsView {
     }
 
     @Inject
-    lateinit var filmsRepository: FilmsRepository
-
-    @Inject
-    lateinit var router: Router
+    lateinit var filmsPresenterFactory: FilmsPresenterFactory
 
     private val presenter: FilmsPresenter by moxyPresenter {
-        FilmsPresenter(filmsRepository, router)
+        filmsPresenterFactory.create()
     }
 
     private var adapter = FilmsAdapter()

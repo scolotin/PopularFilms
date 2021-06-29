@@ -3,12 +3,16 @@ package com.scolotin.popularfilms.presentation.films
 import com.github.terrakok.cicerone.Router
 import com.scolotin.popularfilms.model.Film
 import com.scolotin.popularfilms.repository.FilmsRepository
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
-class FilmsPresenter(private val filmsRepository: FilmsRepository, router: Router) : MvpPresenter<FilmsView>() {
+class FilmsPresenter @AssistedInject constructor(
+        private val filmsRepository: FilmsRepository,
+        router: Router
+) : MvpPresenter<FilmsView>() {
 
     private var disposable: Disposable? = null
 
