@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Popular Films</string>
+    <string name="connection_warning_msg">Please check connection to internet</string>
+    <string name="err_request_msg">Empty error</string>
+</resources>
