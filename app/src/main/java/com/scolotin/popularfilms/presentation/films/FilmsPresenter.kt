@@ -2,6 +2,7 @@ package com.scolotin.popularfilms.presentation.films
 
 import com.github.terrakok.cicerone.Router
 import com.scolotin.popularfilms.model.Film
+import com.scolotin.popularfilms.presentation.film.FilmScreen
 import com.scolotin.popularfilms.repository.FilmsRepository
 import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -11,7 +12,7 @@ import moxy.MvpPresenter
 
 class FilmsPresenter @AssistedInject constructor(
         private val filmsRepository: FilmsRepository,
-        router: Router
+        private val router: Router
 ) : MvpPresenter<FilmsView>() {
 
     private var disposable: Disposable? = null
@@ -36,6 +37,10 @@ class FilmsPresenter @AssistedInject constructor(
         super.onDestroy()
 
         disposable?.dispose()
+    }
+
+    fun displayFilm(film: Film) {
+        router.navigateTo(FilmScreen.createFragment(film))
     }
 
 }

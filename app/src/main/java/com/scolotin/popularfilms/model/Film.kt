@@ -1,7 +1,10 @@
 package com.scolotin.popularfilms.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Film(
     @SerializedName("title")
     val title: String,
@@ -15,7 +18,7 @@ data class Film(
     val voteAverage: Float,
     @SerializedName("overview")
     val overview: String
- )
+) : Parcelable
 
 data class Films(
     @SerializedName("results")

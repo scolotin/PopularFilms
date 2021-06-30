@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.scolotin.popularfilms.R
 import com.scolotin.popularfilms.databinding.FragmentFilmsBinding
 import com.scolotin.popularfilms.model.Film
@@ -11,11 +12,11 @@ import com.scolotin.popularfilms.presentation.abs.AbsFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
-class FilmsFragment : AbsFragment(R.layout.fragment_films), FilmsView {
+class FilmsFragment : AbsFragment(R.layout.fragment_films), FilmsView, FilmsAdapter.Delegate {
 
     companion object {
 
-        fun newInstance() = FilmsFragment()
+        fun newInstance(): Fragment = FilmsFragment()
 
     }
 
@@ -26,7 +27,7 @@ class FilmsFragment : AbsFragment(R.layout.fragment_films), FilmsView {
         filmsPresenterFactory.create()
     }
 
-    private var adapter = FilmsAdapter()
+    private var adapter = FilmsAdapter(this)
 
     private var vb: FragmentFilmsBinding? = null
 
@@ -55,6 +56,10 @@ class FilmsFragment : AbsFragment(R.layout.fragment_films), FilmsView {
             submitList(films)
             notifyDataSetChanged()
         }
+    }
+
+    override fun onPicked(film: Film) {
+        presenter.displayFilm(film)
     }
 
 }

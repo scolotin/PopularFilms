@@ -6,7 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.scolotin.popularfilms.databinding.ItemFragmentFilmsBinding
 import com.scolotin.popularfilms.model.Film
 
-class FilmsAdapter : RecyclerView.Adapter<FilmsViewHolder>(){
+class FilmsAdapter(private val delegate: Delegate?) : RecyclerView.Adapter<FilmsViewHolder>(){
+
+    interface Delegate {
+
+        fun onPicked(film: Film)
+
+    }
 
     private var films: List<Film> = listOf()
 
@@ -20,7 +26,7 @@ class FilmsAdapter : RecyclerView.Adapter<FilmsViewHolder>(){
         )
 
     override fun onBindViewHolder(holder: FilmsViewHolder, position: Int) =
-        holder.bind(films[position])
+        holder.bind(films[position], delegate)
 
     override fun getItemCount(): Int = films.size
 

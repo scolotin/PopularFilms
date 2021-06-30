@@ -8,7 +8,7 @@ import com.scolotin.popularfilms.model.Film
 
 class FilmsViewHolder(private val vb: ItemFragmentFilmsBinding) : RecyclerView.ViewHolder(vb.root) {
 
-    fun bind(film: Film) {
+    fun bind(film: Film, delegate: FilmsAdapter.Delegate?) {
         with(vb) {
             filmTitle.text = film.title
             year.text = film.releaseDate
@@ -18,6 +18,7 @@ class FilmsViewHolder(private val vb: ItemFragmentFilmsBinding) : RecyclerView.V
                 .with(vb.root)
                 .load(glideUrl)
                 .into(poster)
+            root.setOnClickListener { delegate?.onPicked(film) }
         }
     }
 
