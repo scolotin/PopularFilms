@@ -16,7 +16,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideTmdbApi(context: Context): TmdbApi =
+    fun provideTmdbApi(): TmdbApi =
         Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/")
             .client(
