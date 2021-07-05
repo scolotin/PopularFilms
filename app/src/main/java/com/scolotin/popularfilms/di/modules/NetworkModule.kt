@@ -1,6 +1,6 @@
 package com.scolotin.popularfilms.di.modules
 
-import android.content.Context
+import com.scolotin.popularfilms.TMDB_BASE_URL
 import com.scolotin.popularfilms.repository.api.TmdbApi
 import dagger.Module
 import dagger.Provides
@@ -18,7 +18,7 @@ class NetworkModule {
     @Provides
     fun provideTmdbApi(): TmdbApi =
         Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/")
+            .baseUrl(TMDB_BASE_URL)
             .client(
                 OkHttpClient.Builder()
                     .addInterceptor(HttpLoggingInterceptor().apply {
