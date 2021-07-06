@@ -1,22 +1,24 @@
 package com.scolotin.popularfilms.presentation.films
 
 import com.github.terrakok.cicerone.Router
+import com.scolotin.popularfilms.di.IoScheduler
+import com.scolotin.popularfilms.di.UiScheduler
 import com.scolotin.popularfilms.model.Film
 import com.scolotin.popularfilms.presentation.film.FilmScreen
 import com.scolotin.popularfilms.repository.FilmsRepository
 import com.scolotin.popularfilms.repository.connection.ConnectionState
 import com.scolotin.popularfilms.repository.connection.ConnectionStateWatcher
 import dagger.assisted.AssistedInject
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-
-import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
 class FilmsPresenter @AssistedInject constructor(
         private val filmsRepository: FilmsRepository,
         private val connectionStateWatcher: ConnectionStateWatcher,
-        private val router: Router
+        private val router: Router,
+        @UiScheduler private val uiScheduler: Scheduler,
+        @IoScheduler private val ioScheduler: Scheduler
 ) : MvpPresenter<FilmsView>() {
 
     private var disposables = CompositeDisposable()
@@ -26,9 +28,9 @@ class FilmsPresenter @AssistedInject constructor(
             connectionStateWatcher
                 .watchForConnectionState()
                 .filter { connectionState -> connectionState == ConnectionState.CONNECTED }
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(uiScheduler)
                 .doOnNext { displayFilms() }
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(ioScheduler)
                 .subscribe()
         )
 
@@ -39,8 +41,8 @@ class FilmsPresenter @AssistedInject constructor(
         disposables.add(
             filmsRepository
                 .fetchPopularFilms()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
+                .observeOn(uiScheduler)
+                .subscribeOn(ioScheduler)
                 .subscribe(
                     ::showFilms,
                     ::showError

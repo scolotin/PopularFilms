@@ -17,6 +17,7 @@ import javax.inject.Singleton
     MainModule::class,
     UiModule::class,
     ConnectionStateModule::class,
+    SchedulersModule::class,
     FilmsModule::class,
     NetworkModule::class,
     StorageModule::class
