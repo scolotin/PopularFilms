@@ -9,4 +9,7 @@ interface FilmsView : MvpView {
     @SingleState
     fun showFilms(films: List<Film>)
 
+    @SingleState
+    fun showError(message: String?)
+
 }

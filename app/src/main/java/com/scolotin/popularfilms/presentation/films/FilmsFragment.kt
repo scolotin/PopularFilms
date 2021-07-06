@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.scolotin.popularfilms.R
 import com.scolotin.popularfilms.databinding.FragmentFilmsBinding
 import com.scolotin.popularfilms.model.Film
@@ -55,6 +56,12 @@ class FilmsFragment : AbsFragment(R.layout.fragment_films), FilmsView, FilmsAdap
         adapter.run {
             submitList(films)
             notifyDataSetChanged()
+        }
+    }
+
+    override fun showError(message: String?) {
+        message?.let {
+            Snackbar.make(requireContext(), requireView(), it, Snackbar.LENGTH_LONG).show()
         }
     }
 
