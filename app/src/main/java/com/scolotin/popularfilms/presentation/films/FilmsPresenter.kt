@@ -30,6 +30,7 @@ class FilmsPresenter @AssistedInject constructor(
                 .filter { connectionState -> connectionState == ConnectionState.CONNECTED }
                 .observeOn(uiScheduler)
                 .doOnNext { displayFilms() }
+                .doOnError { error -> showError(error) }
                 .subscribeOn(ioScheduler)
                 .subscribe()
         )
