@@ -7,6 +7,6 @@ import dagger.assisted.AssistedFactory
 @AssistedFactory
 interface FilmPresenterFactory {
 
-    fun create(@Assisted("film") film: Film?): FilmPresenter
+    fun create(@Assisted("film") film: Film): FilmPresenter
 
 }

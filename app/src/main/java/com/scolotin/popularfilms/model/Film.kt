@@ -11,17 +11,17 @@ import kotlinx.parcelize.Parcelize
 data class Film(
     @PrimaryKey
     @SerializedName("title")
-    val title: String,
+    val title: String = "",
     @SerializedName("poster_path")
-    val posterPath: String,
+    val posterPath: String = "",
     @SerializedName("release_date")
-    val releaseDate: String?,
+    val releaseDate: String? = "",
     @SerializedName("genre")
-    val genre: String?,
+    val genre: String? = "",
     @SerializedName("vote_average")
-    val voteAverage: Float,
+    val voteAverage: Float = 0.0F,
     @SerializedName("overview")
-    val overview: String
+    val overview: String = ""
 ) : Parcelable
 
 data class Films(

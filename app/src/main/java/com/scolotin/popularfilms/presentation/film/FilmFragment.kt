@@ -22,12 +22,12 @@ class FilmFragment : AbsFragment(R.layout.fragment_film), FilmView {
 
     }
 
+    private val film by lazy {
+        arguments?.getParcelable(ARG_FILM) ?: Film(getString(R.string.txt_unknown_film))
+    }
+
     @Inject
     lateinit var filmPresenterFactory: FilmPresenterFactory
-
-    private val film by lazy {
-        arguments?.getParcelable<Film>(ARG_FILM)
-    }
 
     private val presenter: FilmPresenter by moxyPresenter {
         filmPresenterFactory.create(film)

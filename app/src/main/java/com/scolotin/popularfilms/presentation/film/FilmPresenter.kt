@@ -6,11 +6,11 @@ import dagger.assisted.AssistedInject
 import moxy.MvpPresenter
 
 class FilmPresenter @AssistedInject constructor(
-    @Assisted("film") private val film: Film?
+    @Assisted("film") private val film: Film
 ) : MvpPresenter<FilmView>() {
 
     override fun onFirstViewAttach() {
-        film?.let { showFilm(it) }
+        showFilm(film)
     }
 
     private fun showFilm(film: Film) {
