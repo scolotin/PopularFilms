@@ -1,10 +1,9 @@
 package com.scolotin.popularfilms.presentation.films
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.scolotin.popularfilms.R
 import com.scolotin.popularfilms.databinding.FragmentFilmsBinding
@@ -30,26 +29,12 @@ class FilmsFragment : AbsFragment(R.layout.fragment_films), FilmsView, FilmsAdap
 
     private var adapter = FilmsAdapter(this)
 
-    private var vb: FragmentFilmsBinding? = null
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        FragmentFilmsBinding
-            .inflate(inflater, container, false)
-            .apply {
-                vb = this
-            }
-            .root
+    private val vb: FragmentFilmsBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        vb?.preview?.adapter = adapter
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        vb = null
+        vb.preview.adapter = adapter
     }
 
     override fun showFilms(films: List<Film>) {

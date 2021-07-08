@@ -1,11 +1,8 @@
 package com.scolotin.popularfilms.presentation.film
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.scolotin.popularfilms.R
 import com.scolotin.popularfilms.databinding.FragmentFilmBinding
 import com.scolotin.popularfilms.model.Film
@@ -36,29 +33,15 @@ class FilmFragment : AbsFragment(R.layout.fragment_film), FilmView {
         filmPresenterFactory.create(film)
     }
 
-    private var vb: FragmentFilmBinding? = null
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        FragmentFilmBinding
-            .inflate(inflater, container, false)
-            .apply {
-                vb = this
-            }
-            .root
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        vb = null
-    }
+    private val vb: FragmentFilmBinding by viewBinding()
 
     override fun showFilm(film: Film) {
-        vb?.let {
-            it.filmTitle.text = film.title
-            it.metadata.text = film.releaseDate
-            it.genre.text = film.genre
-            it.rate.text = film.voteAverage.toString()
-            it.description.text = film.overview
+        with(vb) {
+            filmTitle.text = film.title
+            metadata.text = film.releaseDate
+            genre.text = film.genre
+            rate.text = film.voteAverage.toString()
+            description.text = film.overview
         }
     }
 
