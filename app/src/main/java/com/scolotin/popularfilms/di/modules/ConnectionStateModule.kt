@@ -1,16 +1,16 @@
 package com.scolotin.popularfilms.di.modules
 
-import android.content.Context
 import com.scolotin.popularfilms.repository.connection.ConnectionStateWatcher
 import com.scolotin.popularfilms.repository.connection.ConnectionStateWatcherImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import javax.inject.Singleton
 
 @Module
-class ConnectionStateModule {
+interface ConnectionStateModule {
 
-    @Provides
-    fun provideConnectionStateWatcher(context: Context): ConnectionStateWatcher =
-        ConnectionStateWatcherImpl(context)
+    @Singleton
+    @Binds
+    fun bindConnectionStateWatcher(connectionStateWatcher: ConnectionStateWatcherImpl): ConnectionStateWatcher
 
 }
