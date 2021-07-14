@@ -1,21 +1,28 @@
 package com.scolotin.popularfilms.model
 
+import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
+@Entity(tableName = "films")
 data class Film(
+    @PrimaryKey
     @SerializedName("title")
-    val title: String,
+    val title: String = "",
     @SerializedName("poster_path")
-    val posterPath: String,
+    val posterPath: String = "",
     @SerializedName("release_date")
-    val releaseDate: String,
+    val releaseDate: String? = "",
     @SerializedName("genre")
-    val genre: String,
+    val genre: String? = "",
     @SerializedName("vote_average")
-    val voteAverage: Float,
+    val voteAverage: Float = 0.0F,
     @SerializedName("overview")
-    val overview: String
- )
+    val overview: String = ""
+) : Parcelable
 
 data class Films(
     @SerializedName("results")

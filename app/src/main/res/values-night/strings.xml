@@ -3,4 +3,5 @@
     <string name="app_name">Popular Films</string>
     <string name="connection_warning_msg">Please check connection to internet</string>
     <string name="err_request_msg">Empty error</string>
+    <string name="txt_unknown_film">Unknown film</string>
 </resources>

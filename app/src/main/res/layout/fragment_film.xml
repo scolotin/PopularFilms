@@ -49,11 +49,12 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/rate"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/rate_text_size"
             android:textAlignment="center"
             android:layout_marginBottom="@dimen/detailed_item_margin"
+            android:drawableStart="@drawable/ic_rate_star"
             app:layout_constraintTop_toBottomOf="@+id/genre"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
