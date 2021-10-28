@@ -51,7 +51,8 @@ class FilmsFragment : AbsFragment(R.layout.fragment_films), FilmsView, FilmsAdap
     }
 
     override fun onPicked(film: Film) {
-        presenter.displayFilm(film)
+        val screen = presenter.createFragmentScreen(film)
+        presenter.navigateToFilmScreen(screen)
     }
 
 }
