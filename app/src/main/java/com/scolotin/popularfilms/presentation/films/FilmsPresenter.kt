@@ -1,6 +1,7 @@
 package com.scolotin.popularfilms.presentation.films
 
 import com.github.terrakok.cicerone.Router
+import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.scolotin.popularfilms.di.IoScheduler
 import com.scolotin.popularfilms.di.UiScheduler
 import com.scolotin.popularfilms.model.Film
@@ -65,8 +66,11 @@ class FilmsPresenter @AssistedInject constructor(
         disposables.dispose()
     }
 
-    fun displayFilm(film: Film) {
-        router.navigateTo(FilmScreen.createFragment(film))
+    fun createFragmentScreen(film: Film): FragmentScreen {
+        return FilmScreen.createFragment(film)
     }
 
+    fun navigateToFilmScreen(fragmentScreen: FragmentScreen) {
+        router.navigateTo(fragmentScreen)
+    }
 }
