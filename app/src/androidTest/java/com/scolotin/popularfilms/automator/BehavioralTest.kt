@@ -1,12 +1,13 @@
 package com.scolotin.popularfilms.automator
 
-import android.content.Context
 import android.content.Intent
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
-import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.*
+import com.scolotin.popularfilms.*
+import com.scolotin.popularfilms.context
+import com.scolotin.popularfilms.packageName
+import com.scolotin.popularfilms.uiDevice
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -16,12 +17,6 @@ import org.junit.runner.RunWith
 @SdkSuppress(minSdkVersion = 21)
 class BehavioralTest {
 
-    private val uiDevice: UiDevice = UiDevice.getInstance(getInstrumentation())
-
-    private val context = ApplicationProvider.getApplicationContext<Context>()
-
-    private val packageName = context.packageName
-
     @Before
     fun setup() {
         uiDevice.pressHome()
@@ -30,7 +25,7 @@ class BehavioralTest {
         intent!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         context.startActivity(intent)
 
-        uiDevice.wait(Until.hasObject(By.pkg(packageName).depth(0)), TIMEOUT)
+        waitApp()
     }
 
     @Test
@@ -45,7 +40,7 @@ class BehavioralTest {
         val toFilm = uiDevice.findObject(By.res(packageName, "container"))
         toFilm.click()
 
-        uiDevice.wait(Until.hasObject(By.pkg(packageName).depth(0)), TIMEOUT)
+        waitApp()
 
         val filmTitle = uiDevice.findObject(By.res(packageName, "filmTitle"))
         val metadata = uiDevice.findObject(By.res(packageName, "metadata"))
@@ -53,11 +48,11 @@ class BehavioralTest {
         val rate = uiDevice.findObject(By.res(packageName, "rate"))
         val description = uiDevice.findObject(By.res(packageName, "description"))
 
-        Assert.assertNotEquals(filmTitle.text, "")
-        Assert.assertNotEquals(metadata.text, "")
-        Assert.assertNotEquals(genre.text, "")
-        Assert.assertNotEquals(rate.text, "")
-        Assert.assertNotEquals(description.text, "")
+        Assert.assertNotEquals(filmTitle.text, EMPTY_STRING)
+        Assert.assertNotEquals(metadata.text, EMPTY_STRING)
+        Assert.assertNotEquals(genre.text, EMPTY_STRING)
+        Assert.assertNotEquals(rate.text, EMPTY_STRING)
+        Assert.assertNotEquals(description.text, EMPTY_STRING)
     }
 
     @Test
@@ -70,24 +65,18 @@ class BehavioralTest {
 
     @Test
     fun test_SwipeFilms() {
-        uiDevice.swipe(uiDevice.displayHeight / 2, uiDevice.displayWidth / 2,
-                                                 0, uiDevice.displayWidth / 2, 5)
-
-        uiDevice.wait(Until.hasObject(By.pkg(packageName).depth(0)), TIMEOUT)
+        swipeLeft()
+        waitApp()
 
         val poster = uiDevice.findObject(By.res(packageName, "poster"))
         val filmTitle = uiDevice.findObject(By.res(packageName, "filmTitle"))
         val year = uiDevice.findObject(By.res(packageName, "year"))
         val rate = uiDevice.findObject(By.res(packageName, "rate"))
 
-        Assert.assertNotEquals(poster.text, "")
-        Assert.assertNotEquals(filmTitle.text, "")
-        Assert.assertNotEquals(year, "")
-        Assert.assertNotEquals(rate.text, "")
-    }
-
-    companion object {
-        private const val TIMEOUT = 5000L
+        Assert.assertNotEquals(poster.text, EMPTY_STRING)
+        Assert.assertNotEquals(filmTitle.text, EMPTY_STRING)
+        Assert.assertNotEquals(year, EMPTY_STRING)
+        Assert.assertNotEquals(rate.text, EMPTY_STRING)
     }
 
 }

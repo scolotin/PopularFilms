@@ -1,11 +1,10 @@
 package com.scolotin.popularfilms.automator
 
-import android.content.Context
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
-import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
-import androidx.test.uiautomator.UiDevice
+import com.scolotin.popularfilms.context
+import com.scolotin.popularfilms.packageName
+import com.scolotin.popularfilms.uiDevice
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,13 +13,8 @@ import org.junit.runner.RunWith
 @SdkSuppress(minSdkVersion = 21)
 class InitialTest {
 
-    private val context = ApplicationProvider.getApplicationContext<Context>()
-
-    private val packageName = context.packageName
-
     @Test
     fun test_DeviceNotNull() {
-        val uiDevice: UiDevice = UiDevice.getInstance(getInstrumentation())
         Assert.assertNotNull(uiDevice)
     }
 
