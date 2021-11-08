@@ -14,7 +14,7 @@ class FilmFragment : AbsFragment(R.layout.fragment_film), FilmView {
 
     companion object {
 
-        private const val ARG_FILM = "film"
+        const val ARG_FILM = "film"
 
         fun newInstance(film: Film): Fragment = FilmFragment().apply {
             arguments = bundleOf(ARG_FILM to film)
