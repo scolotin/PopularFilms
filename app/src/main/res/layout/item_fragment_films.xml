@@ -4,11 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    android:layout_margin="@dimen/item_margin"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:cardBackgroundColor="@android:color/darker_gray"
-    app:cardCornerRadius="@dimen/item_corner_radius"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@android:color/white"
     app:cardElevation="@dimen/item_elevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,12 +17,24 @@
         <ImageView
             android:id="@+id/poster"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/filmTitle"
             tools:ignore="ContentDescription"/>
+
+        <TextView
+            android:id="@+id/rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/rate_text_size"
+            android:textAlignment="textStart"
+            app:drawableStartCompat="@drawable/ic_rate_star"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/poster"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:drawableTint="@color/white" />
 
         <TextView
             android:id="@+id/filmTitle"
@@ -32,28 +42,20 @@
             android:layout_height="wrap_content"
             android:textAlignment="textStart"
             android:textSize="@dimen/title_text_size"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/poster"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/year"/>
 
         <TextView
             android:id="@+id/year"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/title_text_size"
+            android:textSize="@dimen/year_text_size"
             android:textAlignment="textStart"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"/>
-
-        <TextView
-            android:id="@+id/rate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/title_text_size"
-            android:textAlignment="textEnd"
-            app:drawableStartCompat="@drawable/ic_rate_star"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/filmTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

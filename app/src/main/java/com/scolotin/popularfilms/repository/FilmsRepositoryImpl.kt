@@ -13,10 +13,10 @@ class FilmsRepositoryImpl @Inject constructor(
     @Cache private val cacheDataSource: CacheDataSource
 ) : FilmsRepository {
 
-    override fun fetchPopularFilms(): Single<List<Film>> =
-        cacheDataSource
-            .fetchPopularFilms()
-            .flatMap(::fetchFromNetwork)
+    override fun fetchPopularFilms(): Single<List<Film>> = fetchFromNetwork(listOf())
+//        cacheDataSource
+//            .fetchPopularFilms()
+//            .flatMap(::fetchFromNetwork)
 
     private fun fetchFromNetwork(films: List<Film>): Single<List<Film>> =
         if (films.isEmpty()) {

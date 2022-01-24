@@ -3,7 +3,10 @@ package com.scolotin.popularfilms.presentation.film
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
 import com.scolotin.popularfilms.R
+import com.scolotin.popularfilms.TMDB_IMAGE_BASE_URL
 import com.scolotin.popularfilms.databinding.FragmentFilmBinding
 import com.scolotin.popularfilms.model.Film
 import com.scolotin.popularfilms.presentation.abs.AbsFragment
@@ -37,9 +40,12 @@ class FilmFragment : AbsFragment(R.layout.fragment_film), FilmView {
 
     override fun showFilm(film: Film) {
         with(vb) {
+            val glideUrl = GlideUrl("$TMDB_IMAGE_BASE_URL${film.posterPath}")
+            Glide.with(vb.root)
+                .load(glideUrl)
+                .into(poster)
             filmTitle.text = film.title
             metadata.text = film.releaseDate
-            genre.text = film.genre
             rate.text = film.voteAverage.toString()
             description.text = film.overview
         }

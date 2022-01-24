@@ -3,6 +3,7 @@ package com.scolotin.popularfilms.presentation.films
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.scolotin.popularfilms.R
@@ -34,6 +35,7 @@ class FilmsFragment : AbsFragment(R.layout.fragment_films), FilmsView, FilmsAdap
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        vb.preview.layoutManager = GridLayoutManager(requireContext(), 2)
         vb.preview.adapter = adapter
     }
 

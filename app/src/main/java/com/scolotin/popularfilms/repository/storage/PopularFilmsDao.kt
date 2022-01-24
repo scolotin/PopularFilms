@@ -15,6 +15,6 @@ interface PopularFilmsDao {
     fun fetchFilms(): Single<List<Film>>
 
     @Insert(onConflict = REPLACE)
-    fun retain(users: List<Film>): Completable
+    fun retain(films: List<Film>): Completable
 
 }
