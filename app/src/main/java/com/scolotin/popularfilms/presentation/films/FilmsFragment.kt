@@ -42,10 +42,6 @@ class FilmsFragment : AbsFragment(R.layout.fragment_films), FilmsView, FilmsAdap
 
     override fun showFilms(films: PagingData<Film>) {
         adapter.submitData(lifecycle, films)
-//        adapter.run {
-//            submitList(films)
-//            notifyDataSetChanged()
-//        }
     }
 
     override fun showError(message: String?) {

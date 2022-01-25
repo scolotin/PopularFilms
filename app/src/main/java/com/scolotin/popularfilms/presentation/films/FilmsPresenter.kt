@@ -1,6 +1,7 @@
 package com.scolotin.popularfilms.presentation.films
 
 import androidx.paging.PagingData
+import androidx.paging.rxjava2.cachedIn
 import com.github.terrakok.cicerone.Router
 import com.scolotin.popularfilms.di.IoScheduler
 import com.scolotin.popularfilms.di.UiScheduler
@@ -14,6 +15,7 @@ import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 
 import moxy.MvpPresenter
+import moxy.presenterScope
 
 class FilmsPresenter @AssistedInject constructor(
     private val filmsRepository: FilmsRepository,
@@ -44,6 +46,7 @@ class FilmsPresenter @AssistedInject constructor(
         disposables.add(
             filmsRepository
                 .fetchPopularFilms()
+                .cachedIn(presenterScope)
                 .observeOn(uiScheduler)
                 .subscribeOn(ioScheduler)
                 .subscribe(
