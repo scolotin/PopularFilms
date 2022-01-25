@@ -4,7 +4,7 @@ import com.scolotin.popularfilms.BuildConfig.API_KEY
 import com.scolotin.popularfilms.model.Film
 import com.scolotin.popularfilms.repository.api.TmdbApi
 import com.scolotin.popularfilms.repository.datasource.DataSource
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.Single
 import javax.inject.Inject
 
 class NetworkDataSource @Inject constructor(private val tmdbApi: TmdbApi) : DataSource {

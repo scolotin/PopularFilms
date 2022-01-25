@@ -1,5 +1,6 @@
 package com.scolotin.popularfilms.presentation.films
 
+import androidx.paging.PagingData
 import com.github.terrakok.cicerone.Router
 import com.scolotin.popularfilms.di.IoScheduler
 import com.scolotin.popularfilms.di.UiScheduler
@@ -9,16 +10,17 @@ import com.scolotin.popularfilms.repository.FilmsRepository
 import com.scolotin.popularfilms.repository.connection.ConnectionState
 import com.scolotin.popularfilms.repository.connection.ConnectionStateWatcher
 import dagger.assisted.AssistedInject
-import io.reactivex.rxjava3.core.Scheduler
-import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.Scheduler
+import io.reactivex.disposables.CompositeDisposable
+
 import moxy.MvpPresenter
 
 class FilmsPresenter @AssistedInject constructor(
-        private val filmsRepository: FilmsRepository,
-        private val connectionStateWatcher: ConnectionStateWatcher,
-        private val router: Router,
-        @UiScheduler private val uiScheduler: Scheduler,
-        @IoScheduler private val ioScheduler: Scheduler
+    private val filmsRepository: FilmsRepository,
+    private val connectionStateWatcher: ConnectionStateWatcher,
+    private val router: Router,
+    @UiScheduler private val uiScheduler: Scheduler,
+    @IoScheduler private val ioScheduler: Scheduler
 ) : MvpPresenter<FilmsView>() {
 
     private var disposables = CompositeDisposable()
@@ -51,7 +53,7 @@ class FilmsPresenter @AssistedInject constructor(
         )
     }
 
-    private fun showFilms(films: List<Film>) {
+    private fun showFilms(films: PagingData<Film>) {
         viewState.showFilms(films)
     }
 

@@ -1,7 +1,8 @@
 package com.scolotin.popularfilms.repository.api
 
 import com.scolotin.popularfilms.model.Films
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.Single
+
 import retrofit2.http.GET
 import retrofit2.http.Query
 

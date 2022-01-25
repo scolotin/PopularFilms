@@ -2,7 +2,7 @@ package com.scolotin.popularfilms.repository.datasource
 
 import com.scolotin.popularfilms.model.Film
 import com.scolotin.popularfilms.repository.api.TmdbApi
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.Single
 import javax.inject.Inject
 
 class NetworkDataSource @Inject constructor(

@@ -4,10 +4,10 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
-import io.reactivex.rxjava3.android.MainThreadDisposable
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.Observable
+import io.reactivex.Observer
+import io.reactivex.android.MainThreadDisposable
+import io.reactivex.disposables.Disposable
 
 class ConnectionStateObservable(private val context: Context) : Observable<ConnectionState>() {
 

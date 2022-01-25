@@ -1,7 +1,7 @@
 package com.scolotin.popularfilms.repository.datasource
 
 import com.scolotin.popularfilms.model.Film
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.Single
 
 interface DataSource {
 

@@ -1,7 +1,7 @@
 package com.scolotin.popularfilms.repository.connection
 
 import android.content.Context
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.Observable
 import javax.inject.Inject
 
 class ConnectionStateWatcherImpl @Inject constructor(

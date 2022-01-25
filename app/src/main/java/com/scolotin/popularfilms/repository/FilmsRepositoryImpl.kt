@@ -1,30 +1,28 @@
 package com.scolotin.popularfilms.repository
 
-import com.scolotin.popularfilms.di.Cache
-import com.scolotin.popularfilms.di.Network
-import com.scolotin.popularfilms.repository.datasource.DataSource
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.rxjava2.flowable
 import com.scolotin.popularfilms.model.Film
-import com.scolotin.popularfilms.repository.datasource.cache.CacheDataSource
-import io.reactivex.rxjava3.core.Single
+import com.scolotin.popularfilms.repository.datasource.PagingDataSource
+import io.reactivex.Flowable
 import javax.inject.Inject
 
 class FilmsRepositoryImpl @Inject constructor(
-    @Network private val networkDataSource: DataSource,
-    @Cache private val cacheDataSource: CacheDataSource
+    private val pagingDataSource: PagingDataSource
 ) : FilmsRepository {
 
-    override fun fetchPopularFilms(): Single<List<Film>> = fetchFromNetwork(listOf())
-//        cacheDataSource
-//            .fetchPopularFilms()
-//            .flatMap(::fetchFromNetwork)
-
-    private fun fetchFromNetwork(films: List<Film>): Single<List<Film>> =
-        if (films.isEmpty()) {
-            networkDataSource
-                .fetchPopularFilms()
-                .flatMap(cacheDataSource::retain)
-        } else {
-            Single.just(films)
-        }
+    override fun fetchPopularFilms(): Flowable<PagingData<Film>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = true,
+                maxSize = 30,
+                prefetchDistance = 5,
+                initialLoadSize = 40),
+            pagingSourceFactory = { pagingDataSource }
+        ).flowable
+    }
 
 }

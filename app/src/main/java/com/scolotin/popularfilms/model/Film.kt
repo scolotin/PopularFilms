@@ -24,7 +24,8 @@ data class Film(
     val overview: String = ""
 ) : Parcelable
 
+@Parcelize
 data class Films(
     @SerializedName("results")
     val results: List<Film>
-)
+) : Parcelable

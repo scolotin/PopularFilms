@@ -3,6 +3,7 @@ package com.scolotin.popularfilms.presentation.films
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.snackbar.Snackbar
@@ -39,11 +40,12 @@ class FilmsFragment : AbsFragment(R.layout.fragment_films), FilmsView, FilmsAdap
         vb.preview.adapter = adapter
     }
 
-    override fun showFilms(films: List<Film>) {
-        adapter.run {
-            submitList(films)
-            notifyDataSetChanged()
-        }
+    override fun showFilms(films: PagingData<Film>) {
+        adapter.submitData(lifecycle, films)
+//        adapter.run {
+//            submitList(films)
+//            notifyDataSetChanged()
+//        }
     }
 
     override fun showError(message: String?) {
